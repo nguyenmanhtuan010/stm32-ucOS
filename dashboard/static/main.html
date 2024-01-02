@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhóm 15</title>
+    <script src="/static/main.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/scripts/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/main.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body>
+       <div style="margin-left: 10px; margin-top: 30px;">
+        <div id = "box4">
+          <div id="box7">
+            <figure class="highcharts-figure">
+              <div id="container"></div>
+            </figure>
+          </div>
+        </div>
+        <div class = "box box1">
+          <div id="IDHumidity"></div>
+        </div>
+        <div class = "box box12">
+          <div id="IDHumidity2"></div>
+        </div>
+        <div class = "box box3" >
+          <div id="IDTemperature"></div>
+        </div>
+        <div class = "box box32" >
+          <div id="IDTemperature2"></div>
+        </div>
+        <div class = "box box2" >
+          <div id="IDLight"></div>
+        </div>
+        <div class = "box box22" >
+          <div id="IDLight2"></div>
+        </div>
+          
+        <div class = "box box5">
+          <div id="LampID" style="color: black ;margin-left: 100px;;margin-bottom: 100px;" >
+          <div id="boxc" style="margin-top: 100px;margin-right: 100px;">
+          <p id="Lamp">Lamp</p>
+          <button id="buttonon" type="button" onclick="ButtonON(),pubon(),lampONimage()">ON</button>
+          <button id="buttonoff"type="button" onclick="ButtonOFF(),puboff(),lampOFFimage()">OFF</button>
+          </div>
+          </div>
+        </div>
+        <div class = "box box6" style="color: black ;">
+          <div id="AirconditionerID">
+          <div>
+            <p id="Airconditioner">Air conditioner</p>
+            <button id="buttonon2" type="button" onclick="AirconditionerON(),ButtonON2(),AirconditionerONimage(),pubon2()">ON</button>
+            <button id="buttonoff2" type="button" onclick="AirconditionerOFF(),ButtonOFF2(),AirconditionerOFFimage(),puboff2()">OFF</button>
+          </div>
+          </div>
+        </div>
+       </div>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+       <script>
+      var chart = Highcharts.chart('container', {
+
+        title: {
+            text: 'ĐỒ THỊ QUAN SÁT'
+        },
+
+        subtitle: {
+            text: ' <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank"> Nhóm 15</a>'
+        },
+
+        yAxis: {
+            title: {
+                text: 'DATA'
+            }
+        },
+
+        xAxis: {
+            accessibility: {
+                rangeDescription: 'Range: 1 to 9'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 1
+            }
+        },
+
+        series: [{
+            name: 'Temperature',
+            data: []
+        }, {
+            name: 'Humidity',
+            data: []
+        }, {
+            name: 'Light',
+            data: []
+        },
+        {
+            name: 'Humidity2',
+            data: []
+        },
+        {
+            name: 'Temperature2',
+            data: []
+        },
+        {
+            name: 'Light2',
+            data: []
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+        });  
+      var arrTemp = [];
+      var arrHumi = [];
+      var arrLight = [];
+      var arrTemp2 = [];
+      var arrHumi2 = [];
+      var arrLight2 = []; 
+      var socket = io.connect();
+            socket.on("temp1",function(data){
+              document.getElementById("IDTemperature").innerHTML ="Temperature1: "+data;
+              
+              if (arrTemp.length >= 9) arrTemp.shift() // neu độ dai mang >=9 thi xóa phan tu dau tien cua mang di
+              arrTemp.push(data * 1); // neu nho hon 9 thi cho data la nhiet do vao mang
+              chart.series[0].setData(arrTemp); // set cai mang nhiet do do vao highchart
+              })
+            socket.on("humi1",function(data){
+              document.getElementById("IDHumidity").innerHTML = "Humidity1: "+data;
+              if (arrHumi.length >= 9) arrHumi.shift()
+              arrHumi.push(data * 1);
+              chart.series[1].setData(arrHumi);
+              
+            })
+            socket.on("light1",function(data){
+              document.getElementById("IDLight").innerHTML = "Light1: "+data;
+              if (arrLight.length >= 9) arrLight.shift()
+              arrLight.push(data * 1);
+              chart.series[2].setData(arrLight);
+            })
+            socket.on("temp2",function(data){
+              document.getElementById("IDTemperature2").innerHTML ="Temperature2: "+data;
+              if (arrTemp2.length >= 9) arrTemp2.shift() // neu độ dai mang >=9 thi xóa phan tu dau tien cua mang di
+              arrTemp2.push(data * 1); // neu nho hon 9 thi cho data la nhiet do vao mang
+              chart.series[4].setData(arrTemp2); // set cai mang nhiet do do vao highchart
+            socket.on("humi2",function(data){
+              document.getElementById("IDHumidity2").innerHTML = "Humidity2: "+data;
+              if (arrHumi2.length >= 9) arrHumi2.shift()
+              arrHumi2.push(data * 1);
+              chart.series[3].setData(arrHumi2);
+              })
+            })
+            socket.on("light2",function(data){
+              document.getElementById("IDLight2").innerHTML = "Light2: "+data;
+              if (arrLight2.length >= 9) arrLight2.shift()
+              arrLight2.push(data * 1);
+              chart.series[5].setData(arr2Light);
+            })
+            function puboff(){
+              socket.emit("den1 tat","0");
+            }
+            function pubon(){
+              socket.emit("den1 bat","1");
+            }
+            function puboff2(){
+              socket.emit("den2 tat","0");
+            }
+            function pubon2(){
+              socket.emit("den2 bat","1");
+            }
+       </script>
+</body>
+</html>

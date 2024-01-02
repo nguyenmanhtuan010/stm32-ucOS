@@ -1,0 +1,101 @@
+.box{
+    width: 16%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-color: #4d114f;
+    border-style: solid;
+    color: white;
+}
+
+.box1{
+    background-color: green ;
+    float:left;
+}
+.box2{
+    background-color: red ;
+    float:left;
+}
+.box3{
+    background-color: blue;
+    float:left;
+}
+.box12{
+    background-color: green ;
+    float:left;
+}
+.box22{
+    background-color: red ;
+    float:left;
+}
+.box32{
+    background-color: blue;
+}
+
+#box4{
+    width: 66%;
+    height: 567px;
+    float: left;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid
+}
+.title{
+    background-color: #6f2943;
+    background-image: linear-gradient(120deg, #d983a6, #4d114f);
+    height:50px;display: flex;
+    align-items: center;
+    justify-content: center; 
+    border-width: 5px ; 
+    border-color: black;
+}
+.box5{
+    background-color:  yellow;
+    float:left;
+}
+.box6{
+    background-color:  yellow;
+}
+#IDHumidity{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+#IDTemperature{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+#IDLight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+#LampID{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+   
+}
+#AirconditionerID{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
